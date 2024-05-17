@@ -21,8 +21,8 @@ const CategoriesScreen = () => {
   },[])
 
   const fetchCategories = async () =>{
-    const categories = fetch('https://fakestoreapi.com/products/categories');
-    const categoriesJson = await (await categories).json();
+    const categories = await fetch('https://fakestoreapi.com/products/categories');
+    const categoriesJson = await categories.json();
     console.log(categoriesJson);
   }
 
