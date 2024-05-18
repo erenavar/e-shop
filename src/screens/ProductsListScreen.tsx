@@ -1,6 +1,10 @@
-import { useRoute } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+
+interface IRating{
+  rate:number;
+  count:number;
+}
 
 interface IProducts {
   id:number;
@@ -12,14 +16,15 @@ interface IProducts {
   rating:IRating;
 }
 
-interface IRating{
-  rate:number;
-  count:number;
+interface IFetchedData{
+  products: IProducts,
+  pending:boolean,
+  errorMsg:string
 }
 
 const ProductsListScreen = ({route}) => {
-
-const [products,setProducts] = useState<IProducts>();
+  
+  const [data,setData] = useState<IFetchedData>(null);
 
   return (
     <View>
