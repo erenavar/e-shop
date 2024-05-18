@@ -56,7 +56,12 @@ const CategoriesScreen = () => {
         renderItem={({item}) => 
           <Pressable 
             onPress={() => alert("test")}
-            style={styles.categoriesStyle} 
+            style={({pressed}) => [
+              {
+                backgroundColor: pressed ? 'lightgray' : "lightblue",
+              },
+              styles.categoriesStyle,
+            ]}
           >
               <Text style={styles.categoriesText} >{item}</Text>
           </Pressable>}
@@ -78,16 +83,19 @@ const styles = StyleSheet.create({
   },
   categoriesStyle:{
     flex:1,
-    backgroundColor:"lightgray",
     margin:"5%",
     textAlign:"center",
     borderRadius:20,
     width: 300,
     padding:"10%",
     justifyContent:"center",
-    alignItems:"center"
+    alignItems:"center",
+    
+    
   },
   categoriesText: {
-    textTransform: "uppercase"
+    textTransform: "uppercase",
+    fontSize:15,
+    letterSpacing:2
   }
 }) 
