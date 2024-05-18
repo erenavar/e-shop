@@ -10,7 +10,7 @@ function RootNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Category" component={CategoriesScreen} />
+        <Stack.Screen name="Category" component={CategoriesScreen} options={{title: "CATEGORIES"}} />
         <Stack.Screen name="Details" component={DetailsScreen} />
         <Stack.Screen name="Products" component={ProductsListScreen} />
       </Stack.Navigator>

@@ -54,13 +54,13 @@ const CategoriesScreen = () => {
       <FlatList
         data={categories?.categories}
         renderItem={({item}) => 
-        <Pressable 
-        onPress={() => alert("test")}
-        style={styles.categoriesStyle} 
+          <Pressable 
+            onPress={() => alert("test")}
+            style={styles.categoriesStyle} 
           >
-          <Text >{item}</Text>
-        </Pressable>}
-        keyExtractor={(item, index) => index.toString()} 
+              <Text style={styles.categoriesText} >{item}</Text>
+          </Pressable>}
+          keyExtractor={(item, index) => index.toString()} 
         />
   
     </View>
@@ -73,10 +73,8 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     backgroundColor:"white",
-    alignItems:"center"
-
-    
-
+    alignItems:"center",
+    justifyContent:"center"
   },
   categoriesStyle:{
     flex:1,
@@ -88,5 +86,8 @@ const styles = StyleSheet.create({
     padding:"10%",
     justifyContent:"center",
     alignItems:"center"
+  },
+  categoriesText: {
+    textTransform: "uppercase"
   }
 }) 
