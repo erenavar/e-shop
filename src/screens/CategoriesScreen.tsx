@@ -57,7 +57,7 @@ const CategoriesScreen = () => {
         data={categories?.categories}
         renderItem={({item}) => 
           <Pressable 
-            onPress={() => navigation.navigate("Products")}
+            onPress={() => navigation.navigate("Products",{categoryName:item})}
             style={({pressed}) => [
               {
                 backgroundColor: pressed ? 'lightgray' : "lightblue",

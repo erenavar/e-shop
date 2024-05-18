@@ -1,10 +1,12 @@
+import { useRoute } from '@react-navigation/native'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const ProductsListScreen = () => {
+const ProductsListScreen = ({route}) => {
+
   return (
     <View>
-      <Text>ProductsListScreen</Text>
+      <Text>{route.params.categoryName}</Text>
     </View>
   )
 }
