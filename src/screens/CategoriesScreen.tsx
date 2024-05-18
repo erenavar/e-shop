@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react'
-import { Button, FlatList, Text, View } from 'react-native'
+import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 
@@ -47,24 +47,46 @@ const CategoriesScreen = () => {
     } catch (err) {
       console.log("Error :", err)
     }
-    console.log(categories.categories)
   }
 
-
-
-
-
   return (
-    <View>
-      <Text>Deneme</Text>
-      <Button title='Test' onPress={() => navigation.navigate("Products")} />
+    <View style={styles.container}>
       <FlatList
-        data={categories.categories}
-        renderItem={({item}) => <Text>{item}</Text>}
+        data={categories?.categories}
+        renderItem={({item}) => 
+        <Pressable 
+        onPress={() => alert("test")}
+        style={styles.categoriesStyle} 
+          >
+          <Text >{item}</Text>
+        </Pressable>}
         keyExtractor={(item, index) => index.toString()} 
-      />
+        />
+  
     </View>
   )
 }
 
 export default CategoriesScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    backgroundColor:"white",
+    alignItems:"center"
+
+    
+
+  },
+  categoriesStyle:{
+    flex:1,
+    backgroundColor:"lightgray",
+    margin:"5%",
+    textAlign:"center",
+    borderRadius:20,
+    width: 300,
+    padding:"10%",
+    justifyContent:"center",
+    alignItems:"center"
+  }
+}) 
