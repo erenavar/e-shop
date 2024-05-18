@@ -35,13 +35,15 @@ const CategoriesScreen = () => {
       const categories = await fetch('https://fakestoreapi.com/products/categories');
       const categoriesJson = await categories.json();
 
-      setCategories((prevState) =>({
-        ...prevState,
-        categories : categoriesJson,
-        pending:false,
-        errorMsg:""
-   
-      }));
+      if(categoriesJson != null){ 
+        setCategories((prevState) =>({
+          ...prevState,
+          categories : categoriesJson,
+          pending:false,
+          errorMsg:""
+          
+        }));
+      }
 
 
     } catch (err) {
@@ -55,7 +57,7 @@ const CategoriesScreen = () => {
         data={categories?.categories}
         renderItem={({item}) => 
           <Pressable 
-            onPress={() => alert("test")}
+            onPress={() => navigation.navigate("Products")}
             style={({pressed}) => [
               {
                 backgroundColor: pressed ? 'lightgray' : "lightblue",
