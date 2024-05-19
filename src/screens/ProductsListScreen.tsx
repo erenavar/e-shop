@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
+import Card from '../components/Card';
 
 interface IRating{
   rate:number;
@@ -56,19 +57,21 @@ const ProductsListScreen = ({route}) => {
     }
   }
 
-  if (data) {
-    console.log(data.products);
-  }
-
-
+    const filteredProducts = data.products.filter((item) => item.category == route.params.categoryName);
 
 
   return (
-    <View>
-      <Text>"deneme"</Text>
-      <Text>{route.params.categoryName}</Text>
+    <View style={styles.container}>
+        <Card img="test" description="test2" price="test3" />
+
     </View>
   )
 }
 
 export default ProductsListScreen
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1
+  }
+})
