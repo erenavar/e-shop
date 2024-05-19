@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Text, View } from 'react-native'
 
 interface IRating{
   rate:number;
   count:number;
 }
-
 interface IProducts {
   id:number;
   title:string;
@@ -15,32 +14,61 @@ interface IProducts {
   image:string;
   rating:IRating;
 }
-
 interface IFetchedData{
-  products: IProducts,
+  products: IProducts[],
   pending:boolean,
   errorMsg:string
 }
-
 const ProductsListScreen = ({route}) => {
+  
+  
+  const [data,setData] = useState<IFetchedData>({
+    products:[],
+    pending:false,
+    errorMsg:""
 
-  const [data,setData] = useState<IFetchedData>(null);
+  });
+
+  useEffect(() => {
+    fetchProducts();
+  },[])
 
   const fetchProducts = async () => {
-    const products = await fetch('https://fakestoreapi.com/products');
-    const producstsJson = await products.json()
+    try {
+      setData((prevState) => ({
+        ...prevState,
+        pending:true,
+        errorMsg:""
+      }))
+      
+      const products = await fetch('https://fakestoreapi.com/products');
+      const productsJson = await products.json();
 
+      if(productsJson.length > 1){
+        setData((oldPrev) =>({
+          ...oldPrev,
+          products: productsJson,
+          pending:false
+        }))
+      }
+    } catch (error) {
+      console.log("Error :",error);
+    }
   }
-  fetchProducts();
+
+  if (data) {
+    console.log(data.products);
+  }
+
+
 
 
   return (
     <View>
+      <Text>"deneme"</Text>
       <Text>{route.params.categoryName}</Text>
     </View>
   )
 }
 
 export default ProductsListScreen
-
-const styles = StyleSheet.create({})
