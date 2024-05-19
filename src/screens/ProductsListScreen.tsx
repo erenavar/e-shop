@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import Card from '../components/Card';
 
 interface IRating{
@@ -21,8 +21,7 @@ interface IFetchedData{
   errorMsg:string
 }
 const ProductsListScreen = ({route}) => {
-  
-  
+
   const [data,setData] = useState<IFetchedData>({
     products:[],
     pending:false,
@@ -45,7 +44,7 @@ const ProductsListScreen = ({route}) => {
       const products = await fetch('https://fakestoreapi.com/products');
       const productsJson = await products.json();
 
-      if(productsJson.length > 1){
+      if(productsJson.length !=null){
         setData((oldPrev) =>({
           ...oldPrev,
           products: productsJson,
@@ -59,11 +58,17 @@ const ProductsListScreen = ({route}) => {
 
     const filteredProducts = data.products.filter((item) => item.category == route.params.categoryName);
 
-
   return (
     <View style={styles.container}>
-        <Card img="test" description="test2" price="test3" />
-
+        <FlatList
+          data={filteredProducts}
+          renderItem={({item}) => {
+            return <Card img={item.image} description={item.description} price={item.price} />
+          }}
+          keyExtractor={(item,index)=> index.toString()}
+          horizontal={false}
+          numColumns={2}
+        />
     </View>
   )
 }
@@ -72,6 +77,6 @@ export default ProductsListScreen
 
 const styles = StyleSheet.create({
   container:{
-    flex:1
+    flex:1,
   }
 })
