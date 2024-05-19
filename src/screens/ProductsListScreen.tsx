@@ -23,8 +23,16 @@ interface IFetchedData{
 }
 
 const ProductsListScreen = ({route}) => {
-  
+
   const [data,setData] = useState<IFetchedData>(null);
+
+  const fetchProducts = async () => {
+    const products = await fetch('https://fakestoreapi.com/products');
+    const producstsJson = await products.json()
+
+  }
+  fetchProducts();
+
 
   return (
     <View>
