@@ -13,9 +13,6 @@ interface Iid  {
   id:number
 }
 
-
-
-
 const CategoriesScreen = () => {
   const [categories, setCategories] = useState<ICategories>()
   const navigation:any = useNavigation();
@@ -92,8 +89,6 @@ const styles = StyleSheet.create({
     padding:"10%",
     justifyContent:"center",
     alignItems:"center",
-    
-    
   },
   categoriesText: {
     textTransform: "uppercase",

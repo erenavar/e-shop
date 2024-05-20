@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import Card from '../components/Card';
+
 
 interface IRating{
   rate:number;
@@ -20,7 +21,8 @@ interface IFetchedData{
   pending:boolean,
   errorMsg:string
 }
-const ProductsListScreen = ({route}) => {
+
+const ProductsListScreen = ({route,navigation}) => {
 
   const [data,setData] = useState<IFetchedData>({
     products:[],
@@ -28,6 +30,9 @@ const ProductsListScreen = ({route}) => {
     errorMsg:""
 
   });
+
+
+ 
 
   useEffect(() => {
     fetchProducts();
@@ -57,13 +62,14 @@ const ProductsListScreen = ({route}) => {
   }
 
     const filteredProducts = data.products.filter((item) => item.category == route.params.categoryName);
+    const test = (id) => navigation.navigate("Details",{productId: id})
 
   return (
     <View style={styles.container}>
         <FlatList
           data={filteredProducts}
           renderItem={({item}) => {
-            return <Card img={item.image} description={item.description} price={item.price} />
+            return <Card img={item.image} description={item.description} price={item.price} test={() => test(item.id)} />
           }}
           keyExtractor={(item,index)=> index.toString()}
           horizontal={false}

@@ -2,24 +2,21 @@ import React from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 interface IProps {
-    img:string
-    description:string,
-    price:number
+    img?:string
+    description?:string,
+    price?:number,
+    test?:() => any
 }
-
-
 
 export default function Card(props:IProps) {
   return (
-    <Pressable style={styles.container} onPress={() => alert("test")}>
+    <Pressable style={styles.container} onPress={() =>props.test()}>
         <View style={styles.imgWrapper}>
         <Image
             style={styles.images}
             source={{uri:props.img}}       
             />
         </View>
-       
-     
       <Text style={styles.desc}  numberOfLines={2}>{props.description}</Text>
       <Text style={styles.prices}>${props.price}</Text>
     </Pressable>
