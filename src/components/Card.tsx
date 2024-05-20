@@ -5,16 +5,16 @@ interface IProps {
     img?:string
     description?:string,
     price?:number,
-    test?:() => any
+    toDetails?:() => any
 }
 
 export default function Card(props:IProps) {
   return (
-    <Pressable style={styles.container} onPress={() =>props.test()}>
+    <Pressable style={styles.container} onPress={() =>props.toDetails()}>
         <View style={styles.imgWrapper}>
         <Image
             style={styles.images}
-            source={{uri:props.img}}       
+            source={{uri:props.img}}
             />
         </View>
       <Text style={styles.desc}  numberOfLines={2}>{props.description}</Text>

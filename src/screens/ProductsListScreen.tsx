@@ -62,14 +62,14 @@ const ProductsListScreen = ({route,navigation}) => {
   }
 
     const filteredProducts = data.products.filter((item) => item.category == route.params.categoryName);
-    const test = (id) => navigation.navigate("Details",{productId: id})
+    const linkToDetailsPage = (id) => navigation.navigate("Details",{productId: id})
 
   return (
     <View style={styles.container}>
         <FlatList
           data={filteredProducts}
           renderItem={({item}) => {
-            return <Card img={item.image} description={item.description} price={item.price} test={() => test(item.id)} />
+            return <Card img={item.image} description={item.description} price={item.price} toDetails={() => linkToDetailsPage(item.id)} />
           }}
           keyExtractor={(item,index)=> index.toString()}
           horizontal={false}
