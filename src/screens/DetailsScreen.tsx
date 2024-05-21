@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 
 
 interface IRating{
@@ -18,14 +18,14 @@ interface IAllDetails {
 }
 
 interface IDetails{
-  productDetails:IDetails[]|null,
+  productDetails:IAllDetails|null,
   pending:boolean,
   errorMsg:string
 }
 
 const DetailsScreen = ({route}) => {
   const [details,setDetails] = useState<IDetails>({
-    productDetails:[],
+    productDetails:null,
     pending:false,
     errorMsg:""
   });
@@ -38,7 +38,7 @@ const DetailsScreen = ({route}) => {
     try {
       setDetails((prevState) =>({
         ...prevState,
-        productDetails:[],
+        productDetails:null,
         pending:false,
         errorMsg:""
       }))
@@ -52,7 +52,6 @@ const DetailsScreen = ({route}) => {
         pending:false,
   
       }))
-
       
     } catch (error) {
       console.log("Error:",error)
@@ -66,6 +65,9 @@ const DetailsScreen = ({route}) => {
     <View>
       <Text>DetailsScreen</Text>
       <Text>{route.params.productId}</Text>
+      <Text>{details.productDetails?.title}</Text>
+      <Text>{details.productDetails?.price}</Text>
+      <Text>{details.productDetails?.description}</Text>
     </View>
   )
 }
