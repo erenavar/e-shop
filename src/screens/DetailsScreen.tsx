@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
 
 
 interface IRating{
@@ -22,6 +22,9 @@ interface IDetails{
   pending:boolean,
   errorMsg:string
 }
+
+
+
 
 const DetailsScreen = ({route}) => {
   const [details,setDetails] = useState<IDetails>({
@@ -56,22 +59,44 @@ const DetailsScreen = ({route}) => {
     } catch (error) {
       console.log("Error:",error)
     }
-   
-
   }
 
-  console.log(details.productDetails)
+  const image = {uri: details.productDetails?.image};
   return (
+    <View style={styles.container}>
+      <View style= {{backgroundColor:"white",paddingTop:"10%"}} >
+
+       <ImageBackground style={styles.image} source={image} resizeMode="contain" >
+        </ImageBackground>
+      </View>
+        
     <View>
-      <Text>DetailsScreen</Text>
-      <Text>{route.params.productId}</Text>
       <Text>{details.productDetails?.title}</Text>
+          <Text>dsds</Text>
       <Text>{details.productDetails?.price}</Text>
       <Text>{details.productDetails?.description}</Text>
+    </View>
     </View>
   )
 }
 
 export default DetailsScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+  },
+  image:{
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center",
+    width:"100%",
+    height:300,
+    backgroundColor:"red",
+    marginBottom:"90%"
+
+
+  
+    
+  }
+})
