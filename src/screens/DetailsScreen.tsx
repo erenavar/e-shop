@@ -64,16 +64,14 @@ const DetailsScreen = ({route}) => {
   const image = {uri: details.productDetails?.image};
   return (
     <View style={styles.container}>
-      <View style= {{backgroundColor:"white",paddingTop:"10%"}} >
+      <View style= {styles.imageContainer} >
+       <ImageBackground style={styles.image} source={image} resizeMode="contain"/>
 
-       <ImageBackground style={styles.image} source={image} resizeMode="contain" >
-        </ImageBackground>
       </View>
         
-    <View>
-      <Text>{details.productDetails?.title}</Text>
-          <Text>dsds</Text>
-      <Text>{details.productDetails?.price}</Text>
+    <View style={styles.textContainer}>
+      <Text style={styles.title}>{details.productDetails?.title}</Text>
+      <Text style={styles.price}>${details.productDetails?.price}</Text>
       <Text>{details.productDetails?.description}</Text>
     </View>
     </View>
@@ -86,6 +84,10 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
   },
+  imageContainer: {
+    backgroundColor:"white",
+    paddingTop:"10%"
+  },
   image:{
     flex:1,
     justifyContent:"center",
@@ -93,10 +95,19 @@ const styles = StyleSheet.create({
     width:"100%",
     height:300,
     backgroundColor:"red",
-    marginBottom:"90%"
-
-
-  
-    
+    marginBottom:"90%" 
+  },
+  textContainer: {
+    gap: 15,
+    paddingTop:20
+  },
+    title: {
+    fontWeight:"bold",
+    fontSize:16
+  },
+  price: {
+    color: "darkblue",
+    fontWeight:"bold",
+    fontSize:20
   }
 })
